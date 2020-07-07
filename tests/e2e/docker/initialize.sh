@@ -20,11 +20,3 @@ wp option set woocommerce_allow_tracking "no"
 
 echo "Importing WooCommerce shop pages..."
 wp wc --user=admin tool run install_pages
-
-
-
-echo "Installing and activating the WordPress Importer plugin..."
-wp plugin install wordpress-importer --activate
-
-echo "Importing some sample data..."
-wp import wp-content/plugins/woocommerce/sample-data/sample_products.xml --authors=skip

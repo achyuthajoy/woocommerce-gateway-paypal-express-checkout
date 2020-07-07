@@ -243,6 +243,7 @@ beforeAll( async () => {
 	enablePageDialogAccept();
 	observeConsoleLogging();
 	await trashExistingPosts();
+	await importSampleProducts();
 	await setupBrowser();
 } );
 
