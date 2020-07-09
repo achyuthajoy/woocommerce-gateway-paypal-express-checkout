@@ -9,7 +9,12 @@ if [[ ${RUN_PHPCS} == 1 ]]; then
 		# Install wpcs globally:
 		composer require woocommerce/woocommerce-sniffs
 
+		echo "Modified files in commit:"
+		echo $CHANGED_FILES
+
 		echo "Running Code Sniffer."
 		./vendor/bin/phpcs --ignore=$IGNORE --encoding=utf-8 -s -n -p $CHANGED_FILES
+	else
+		echo "No PHP files modified. Skipping Coding Standards Test"
 	fi
 fi
