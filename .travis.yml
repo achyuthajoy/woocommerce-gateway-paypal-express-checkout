@@ -1,20 +1,42 @@
 language: php
 os: linux
 dist: xenial
-sudo: false
 
 notifications:
   email: false
 
+services:
+  - docker
+
 php:
   - 7.0
+
+matrix:
+  fast_finish: true
+  include:
+  - name: "Coding Standards"
+    php: 7.0
+    env: RUN_PHPCS=1
+
+cache:
+  directories:
+    - $HOME/.jest-cache
+    - $HOME/.nvm/.cache
+    - $HOME/.npm
+    - $HOME/.composer/cache
+
+before_script:
+  - phpenv config-rm xdebug.ini
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+install:
+  - composer install --no-dev
+  - npm install
+  - nvm install 10
+
+script:
+  - bash tests/bin/phpcs.sh
 
 branches:
   only:
     - master
-
-install:
-  - composer install
-
-script:
-  - vendor/bin/phpcs
